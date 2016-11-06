@@ -1,3 +1,11 @@
 # Devise
   production and test
     config.action_mailer.default_url_options
+
+
+Casos de uso
+  Gerenciar projetos
+  Listar meus projetos
+  Listar todos os projetos que posso ver
+  Gerenciar colaboradores de um projeto
+  Gerenciar times de um projeto
