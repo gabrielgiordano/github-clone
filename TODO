@@ -1,0 +1,3 @@
+# Devise
+  production and test
+    config.action_mailer.default_url_options
