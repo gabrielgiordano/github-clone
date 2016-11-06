@@ -1,66 +1,74 @@
-class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:show]
+require "projects/creator"
+require "projects/updater"
+require "projects/destroyer"
+require "projects/policy"
 
-  # GET /projects
+class ProjectsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action -> { authorize_user_with(Projects::Policy, current_user.id, project_id, action_name) }
+
   def index
     @projects = Project.all
   end
 
-  # GET /projects/1
-  def show
-  end
-
-  # GET /projects/new
   def new
     @project = Project.new
   end
 
-  # GET /projects/1/edit
-  def edit
-  end
-
-  # POST /projects
   def create
-    params = project_params.merge(user: current_user)
-    @project = Project.new(params)
+    creation = Projects::Creator.execute(project_params.merge(user_id: current_user.id))
 
     respond_to do |format|
-      if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+      if creation.successful?
+        format.html { redirect_to creation.project, notice: 'Project was successfully created.' }
       else
+        setup_error_from(creation)
         format.html { render :new }
       end
     end
   end
 
-  # PATCH/PUT /projects/1
+  def edit
+    @project = Project.find(project_id)
+  end
+
   def update
+    update = Projects::Updater.execute(project_id, project_params)
+
     respond_to do |format|
-      if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+      if update.successful?
+        format.html { redirect_to update.project, notice: 'Project was successfully updated.' }
       else
+        setup_error_from(update)
         format.html { render :edit }
       end
     end
   end
 
-  # DELETE /projects/1
+  def show
+    @project = Project.find(project_id)
+  end
+
   def destroy
-    @project.destroy
+    Projects::Destroyer.execute(project_id)
+
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_project
-      @project = Project.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def project_params
-      params.require(:project).permit(:name, :description, :private)
-    end
+  def project_params
+    params.require(:project).permit(:name, :description, :private)
+  end
+
+  def project_id
+    params[:id]
+  end
+
+  def setup_error_from(result)
+    @project = result.project
+    flash.now[:alert] = result.messages
+  end
 end
