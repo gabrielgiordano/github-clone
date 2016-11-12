@@ -1,3 +1,4 @@
+require "projects/list"
 require "projects/creator"
 require "projects/updater"
 require "projects/destroyer"
@@ -8,7 +9,7 @@ class ProjectsController < ApplicationController
   before_action -> { authorize_user_with(Projects::Policy, current_user.id, project_id, action_name) }
 
   def index
-    @projects = Project.all
+    @projects = Projects::List.execute(current_user.id)
   end
 
   def new
