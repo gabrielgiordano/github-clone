@@ -6,10 +6,10 @@ require "projects/policy"
 
 class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action -> { authorize_user_with(Projects::Policy, current_user.id, project_id, action_name) }
+  before_action -> { authorize_user_with(Projects::Policy, current_user&.id, project_id, action_name) }
 
   def index
-    @projects = Projects::List.execute(current_user.id)
+    @projects = Projects::List.execute(current_user&.id)
   end
 
   def new
