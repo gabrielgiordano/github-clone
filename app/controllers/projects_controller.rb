@@ -11,7 +11,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    creation = Projects::Creator.execute(project_params.merge(user_id: current_user.id))
+    creation = Projects::Creator.execute(project_params, current_user.id)
 
     respond_to do |format|
       if creation.successful?

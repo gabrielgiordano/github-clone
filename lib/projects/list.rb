@@ -21,7 +21,8 @@ module Projects
     end
 
     def user_projects
-      Project.where(user_id: user_id)
+      project_ids = UserRole.where(user_id: user_id).pluck(:project_id)
+      Project.where(id: project_ids)
     end
 
     def public_projects
