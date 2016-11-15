@@ -1,5 +1,3 @@
-require "projects/result"
-
 module Projects
   class Creator
     def self.execute(attributes)

@@ -1,5 +1,3 @@
-require "projects/result"
-
 module Projects
   class Updater
     def self.execute(project_id, attributes)
