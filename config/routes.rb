@@ -4,7 +4,12 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  resources :teams do
+    resources :members, controller: "team_members", only: [:create]
+    delete "members/:user_id", to: "team_members#destroy", as: :member
+  end
+
   resources :projects do
-    resources :collaborators, only: [:index, :create, :update, :destroy]
+    resources :collaborators, controller: "project_collaborators", only: [:index, :create, :update, :destroy]
   end
 end

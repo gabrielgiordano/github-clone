@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @team.name %>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Members</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @team.members.each do |member| %>
+      <tr>
+        <td><%= member.email %></td>
+        <td><%= link_to 'Destroy', team_member_path(@team, member), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= form_tag(team_members_path(@team), method: "post", class: "form-inline") do  %>
+  <div class="form-group">
+    <%= label_tag(:email, "Email") %>
+    <%= text_field_tag(:email, "", class: "form-control") %>
+  </div>
+
+  <%= submit_tag("Add member", class: "btn btn-default") %>
+<% end %>
+
+<%= link_to 'Edit', edit_team_path(@team) %> |
+<%= link_to 'Back', teams_path %>

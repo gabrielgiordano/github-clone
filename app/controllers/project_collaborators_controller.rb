@@ -1,4 +1,4 @@
-class CollaboratorsController < ApplicationController
+class ProjectCollaboratorsController < ApplicationController
   before_action :authenticate_user!
   before_action -> { authorize_user_with(Collaborators::Policy, current_user.id, project_id, user_role_id, action_name) }
   before_action :set_project_id
