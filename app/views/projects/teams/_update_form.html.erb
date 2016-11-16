@@ -1,0 +1,26 @@
+<%= form_tag(project_team_path(project_id, role.id), method: "put", class: "form-inline") do  %>
+  <div class="form-group">
+    <label class="sr-only">Owner</label>
+    <p class="form-control-static"><%= team.user.email %></p>
+  </div>
+
+  <div class="form-group">
+    <label class="sr-only">Name</label>
+    <p class="form-control-static"><%= team.name %></p>
+  </div>
+
+  <div class="form-group">
+    <% @selected_team_role = role %>
+    <%= select(:selected_team_role, :role, [["Reader", "reader"], ["Writer", "writer"], ["Owner", "owner"]], {}, { :class => "form-control" }) %>
+  </div>
+
+  <%= submit_tag("Update", class: "btn btn-default") %>
+
+  <div class="form-group">
+    <%= link_to "Destroy", project_team_path(project_id, role.id), method: :delete, data: { confirm: "Are you sure?" } %>
+  </div>
+<% end %>
+
+
+
+

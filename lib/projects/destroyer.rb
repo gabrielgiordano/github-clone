@@ -10,8 +10,9 @@ module Projects
 
     def execute
       ActiveRecord::Base.transaction do
-        project.destroy
         user_roles_from_project.destroy_all
+        team_roles_from_project.destroy_all
+        project.destroy
       end
     end
 
@@ -25,6 +26,10 @@ module Projects
 
     def user_roles_from_project
       UserRole.where(project_id: project_id)
+    end
+
+    def team_roles_from_project
+      TeamRole.where(project_id: project_id)
     end
   end
 end

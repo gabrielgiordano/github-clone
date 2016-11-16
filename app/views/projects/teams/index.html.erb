@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Project Teams</h1>
+
+<% if @team_role&.errors&.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@team_role.errors.count, "error") %> prohibited this operation from being concluded:</h2>
+    <ul>
+    <% @team_role.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% @team_roles.each do |team_role| %>
+  <%= render "update_form", project_id: @project_id, team: team_role[:team], role: team_role[:role] %>
+<% end %>
+
+<%= render "form", team_role: @team_role %>
+
+<%= link_to 'Back', project_path(@project_id) %>

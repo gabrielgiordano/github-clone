@@ -1,9 +1,9 @@
-class UserRole < ApplicationRecord
+class TeamRole < ApplicationRecord
   enum role: { owner: 0, writer: 1, reader: 2 }
 
-  belongs_to :user
+  belongs_to :team
   belongs_to :project
 
   validates :role, presence: true
-  validates :user, uniqueness: { scope: :project }
+  validates :team, uniqueness: { scope: :project }
 end
