@@ -26,9 +26,18 @@ module Projects
     def save_project
       project.transaction do
         project.save
-        user_role = UserRole.new(role: :owner, user_id: user_id, project_id: project.id)
-        user_role.save
+        save_user_role
+        create_repository
       end
+    end
+
+    def save_user_role
+      user_role = UserRole.new(role: :owner, user_id: user_id, project_id: project.id)
+      user_role.save
+    end
+
+    def create_repository
+      ::Rugged::Repository.init_at("repositories/#{project.name}")
     end
 
     def result_of_create

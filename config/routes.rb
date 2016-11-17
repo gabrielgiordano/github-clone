@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   resources :projects do
     scope module: :projects do
+      resources :files, only: [:new, :create]
+      get "files/:file_name", to: "files#show", :constraints => { :file_name => /[\-\_\w\.]+/ }, as: :file
       resources :teams, only: [:index, :create, :update, :destroy]
       resources :collaborators, only: [:index, :create, :update, :destroy]
     end

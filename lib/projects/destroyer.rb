@@ -12,6 +12,7 @@ module Projects
       ActiveRecord::Base.transaction do
         user_roles_from_project.destroy_all
         team_roles_from_project.destroy_all
+        destroy_repository
         project.destroy
       end
     end
@@ -30,6 +31,10 @@ module Projects
 
     def team_roles_from_project
       TeamRole.where(project_id: project_id)
+    end
+
+    def destroy_repository
+      FileUtils.rm_rf("repositories/#{project.name}")
     end
   end
 end
