@@ -15,26 +15,11 @@
   <%= @project.private %>
 </p>
 
-<table>
-  <thead>
-    <tr>
-      <th>FileName</th>
-      <th>Last Modification</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @files.each do |file| %>
-      <tr>
-        <td><%= link_to file[:name], project_file_path(@project, file[:name]) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render 'file_list', project_id: @project.id, files: @files %>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %> |
 <%= link_to 'Collaborators', project_collaborators_path(@project) %> |
 <%= link_to 'Teams', project_teams_path(@project) %> |
+<%= link_to 'Suggestions', project_suggestions_path(@project) %> |
 <%= link_to 'Add File', new_project_file_path(@project) %>

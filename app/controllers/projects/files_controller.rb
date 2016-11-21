@@ -6,13 +6,19 @@ module Projects
     end
 
     def show
-      @file = Files::Show.execute(project_id, file_name)
+      @file = Files::Show.execute(project_id, "master", file_name)
     end
 
     def create
-      Files::Creator.execute(project_id, files_params[:file])
+      Files::Creator.execute(current_user.id, project_id, files_params[:file])
       flash[:notice] = "File uploaded"
-      redirect_to new_project_file_url(project_id)
+      redirect_to project_url(project_id)
+    end
+
+    def destroy
+      Files::Destroyer.execute(current_user.id, project_id, file_name)
+      flash[:notice] = "File destroyed"
+      redirect_to project_url(project_id)
     end
 
     private

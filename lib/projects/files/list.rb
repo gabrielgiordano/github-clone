@@ -1,40 +1,30 @@
 module Projects
   module Files
     class List
-      def self.execute(project)
-        new(project).execute
+      def self.execute(project, branch)
+        new(project, branch).execute
       end
 
-      def initialize(project)
+      def initialize(project, branch)
         @project = project
+        @branch = branch
       end
 
       def execute
-        tree.map do |blob|
+        ::Projects::Git::Files::List.execute(repository, branch).map do |file|
           {
-            name: blob[:name],
-            oid: blob[:oid]
+            name: file[:name]
           }
         end
       end
 
       private
 
-      attr_reader :project
-
-      def tree
-        commit = master_branch.target
-        commit.tree
-      end
-
-      def master_branch
-        repository.branches["master"]
-      end
+      attr_reader :project, :branch
 
       def repository
-        @repository ||= ::Rugged::Repository.new("repositories/#{project.name}")
+        @repository ||= ::Projects::Repository.for(project.id)
       end
-
     end
   end
 end

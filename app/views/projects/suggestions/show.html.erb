@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @suggestion.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @suggestion.description %>
+</p>
+
+<pre><%= @diff.force_encoding("UTF-8") %></pre>
+
+<%= link_to 'Edit', edit_project_suggestion_path(@project_id, @suggestion) %> |
+<%= link_to 'Back', project_suggestions_path(@project_id) %>

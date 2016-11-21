@@ -42,7 +42,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(project_id)
-    @files = Projects::Files::List.execute(@project)
+    @files = Projects::Files::List.execute(@project, "master")
   end
 
   def destroy

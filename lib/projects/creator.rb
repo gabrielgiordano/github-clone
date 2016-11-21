@@ -37,7 +37,7 @@ module Projects
     end
 
     def create_repository
-      ::Rugged::Repository.init_at("repositories/#{project.name}")
+      RepositoryInitializer.execute(user_id, project.id)
     end
 
     def result_of_create

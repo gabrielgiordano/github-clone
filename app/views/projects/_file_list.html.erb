@@ -1,0 +1,19 @@
+<table>
+  <thead>
+    <tr>
+      <th>FileName</th>
+      <th>Last Modification</th>
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% files.each do |file| %>
+      <tr>
+        <td><%= link_to file[:name], project_file_path(project_id, file[:name]) %></td>
+        <td></td>
+        <td><%= link_to 'Destroy', project_file_path(project_id, file[:name]), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

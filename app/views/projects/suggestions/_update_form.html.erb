@@ -1,0 +1,25 @@
+<%= form_tag(project_suggestion_path(project_id, suggestion), method: "put") do %>
+  <% if suggestion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(suggestion.errors.count, "error") %> prohibited this suggestion from being updated:</h2>
+
+      <ul>
+      <% suggestion.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label_tag :title %>
+    <%= text_field_tag(:title, suggestion.title, class: "form-control") %>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag :description %>
+    <%= text_field_tag(:description, suggestion.description, class: "form-control") %>
+  </div>
+
+  <%= submit_tag("Edit Suggestion", class: "btn btn-default") %>
+<% end %>
