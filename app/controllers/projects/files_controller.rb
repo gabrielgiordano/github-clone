@@ -1,5 +1,7 @@
 module Projects
   class FilesController < ApplicationController
+    before_action :authenticate_user!, except: [:show]
+    before_action -> { authorize_user_with(Files::Policy, current_user&.id, project_id, action_name) }
     before_action :set_project_id
 
     def new

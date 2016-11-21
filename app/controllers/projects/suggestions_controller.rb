@@ -1,5 +1,7 @@
 module Projects
   class SuggestionsController < ApplicationController
+    before_action :authenticate_user!, except: [:index, :show, :show_file]
+    before_action -> { authorize_user_with(Suggestions::Policy, current_user&.id, project_id, suggestion_id, action_name) }
     before_action :set_suggestion, only: [:edit, :update, :destroy]
     before_action :set_project_id
 
