@@ -38,7 +38,7 @@
     </div>
   </div>
 
-  <% if ::Projects::Teams::Policy.allowed_actions(current_user.id, @project_id, nil).include?(:create) %>
+  <% if ::Projects::Teams::Policy.allowed_actions(current_user&.id, @project_id, nil).include?(:create) %>
     <div class="panel panel-default">
       <div class="panel-heading">
         Add new one

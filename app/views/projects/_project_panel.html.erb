@@ -4,23 +4,23 @@
       <div class="panel-body">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
-          <% if ::Projects::Policy.allowed_actions(current_user.id, @project.id).include?(:show) %>
+          <% if ::Projects::Policy.allowed_actions(current_user&.id, @project.id).include?(:show) %>
             <li class=<%= menu[:files].present? ? "active" : "" %>><%= link_to 'Files', project_path(@project) %></li>
           <% end %>
 
-          <% if ::Projects::Suggestions::Policy.allowed_actions(current_user.id, @project.id, nil).include?(:index) %>
+          <% if ::Projects::Suggestions::Policy.allowed_actions(current_user&.id, @project.id, nil).include?(:index) %>
             <li class=<%= menu[:suggestions].present? ? "active" : "" %>><%= link_to 'Suggestions', project_suggestions_path(@project) %></li>
           <% end %>
 
-          <% if ::Projects::Collaborators::Policy.allowed_actions(current_user.id, @project.id, nil).include?(:index) %>
+          <% if ::Projects::Collaborators::Policy.allowed_actions(current_user&.id, @project.id, nil).include?(:index) %>
             <li class=<%= menu[:collaborators].present? ? "active" : "" %>><%= link_to 'Collaborators', project_collaborators_path(@project) %></li>
           <% end %>
 
-          <% if ::Projects::Teams::Policy.allowed_actions(current_user.id, @project.id, nil).include?(:index) %>
+          <% if ::Projects::Teams::Policy.allowed_actions(current_user&.id, @project.id, nil).include?(:index) %>
             <li class=<%= menu[:teams].present? ? "active" : "" %>><%= link_to 'Teams', project_teams_path(@project) %></li>
           <% end %>
 
-          <% if ::Projects::Policy.allowed_actions(current_user.id, @project.id).include?(:edit) %>
+          <% if ::Projects::Policy.allowed_actions(current_user&.id, @project.id).include?(:edit) %>
             <li class=<%= menu[:edit_project].present? ? "active" : "" %>><%= link_to 'Edit Project', edit_project_path(@project) %></li>
           <% end %>
         </ul>

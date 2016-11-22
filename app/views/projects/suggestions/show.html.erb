@@ -9,7 +9,7 @@
       <div class="panel-body">
         <h3><%= @suggestion.title %></h3>
         <p><%= @suggestion.description %></p>
-        <% if ::Projects::Suggestions::Policy.allowed_actions(current_user.id, @project_id, @suggestion.id).include?(:edit) %>
+        <% if ::Projects::Suggestions::Policy.allowed_actions(current_user&.id, @project_id, @suggestion.id).include?(:edit) %>
           <%= link_to 'Edit Suggestion', edit_project_suggestion_path(@project_id, @suggestion) %>
         <% end %>
       </div>

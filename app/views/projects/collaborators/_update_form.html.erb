@@ -1,5 +1,5 @@
 <%= form_tag(project_collaborator_path(project_id, user_role.id), method: "put", class: "hub-row") do  %>
-  <% if ::Projects::Collaborators::Policy.allowed_actions(current_user.id, project_id, user_role.id).include?(:update) %>
+  <% if ::Projects::Collaborators::Policy.allowed_actions(current_user&.id, project_id, user_role.id).include?(:update) %>
     <% @update_enabled = true %>
   <% else %>
     <% @update_enabled = false %>
@@ -22,7 +22,7 @@
   </div>
 
   <div class="form-group hub-cell">
-    <% if ::Projects::Collaborators::Policy.allowed_actions(current_user.id, project_id, user_role.id).include?(:destroy) %>
+    <% if ::Projects::Collaborators::Policy.allowed_actions(current_user&.id, project_id, user_role.id).include?(:destroy) %>
       <%= link_to project_collaborator_path(project_id, user_role.id), method: :delete, data: { confirm: "Are you sure?" } do %>
         <button type="button" class="btn btn-inline btn-danger">Destroy</button>
       <% end %>

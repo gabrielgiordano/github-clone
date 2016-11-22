@@ -4,7 +4,7 @@
 
   <%= render 'file_list', project_id: @project.id, files: @files %>
 
-  <% if ::Projects::Files::Policy.allowed_actions(current_user.id, @project.id).include?(:create) %>
+  <% if ::Projects::Files::Policy.allowed_actions(current_user&.id, @project.id).include?(:create) %>
     <div class="panel panel-default">
       <div class="panel-heading">
         Add a new file

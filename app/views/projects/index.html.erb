@@ -28,11 +28,11 @@
                             <strong class="primary-font"><%= project.name %></strong>
                           <% end %>
                           <small class="pull-right text-muted">
-                            <% if ::Projects::Policy.allowed_actions(current_user.id, project.id).include?(:edit) %>
+                            <% if ::Projects::Policy.allowed_actions(current_user&.id, project.id).include?(:edit) %>
                               <%= link_to 'Edit', edit_project_path(project) %> |
                             <% end %>
 
-                            <% if ::Projects::Policy.allowed_actions(current_user.id, project.id).include?(:destroy) %>
+                            <% if ::Projects::Policy.allowed_actions(current_user&.id, project.id).include?(:destroy) %>
                               <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %> |
                             <% end %>
                             <i class="fa fa-clock-o fa-fw"></i>
