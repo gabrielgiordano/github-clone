@@ -12,7 +12,7 @@
  *
  *= require font-awesome
  *= require bootstrap_sb_admin_base_v2
- *= require diff2html
+ *= require diff2html/dist/diff2html.min
  *= require_tree .
  *= require_self
  */

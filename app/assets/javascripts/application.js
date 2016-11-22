@@ -13,5 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap_sb_admin_base_v2
-//= require diff2html
+//= require diff2html/dist/diff2html.min
+//= require diff2html/dist/diff2html-ui.min
 //= require_tree .
