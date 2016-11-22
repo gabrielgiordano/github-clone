@@ -1,26 +1,36 @@
-<%= form_tag(project_team_path(project_id, role.id), method: "put", class: "form-inline") do  %>
-  <div class="form-group">
+<%= form_tag(project_team_path(project_id, role.id), method: "put", class: "hub-row") do  %>
+  <% if ::Projects::Teams::Policy.allowed_actions(current_user.id, project_id, role.id).include?(:update) %>
+    <% @update_enabled = true %>
+  <% else %>
+    <% @update_enabled = false %>
+  <% end %>
+
+  <div class="form-group hub-cell">
     <label class="sr-only">Owner</label>
     <p class="form-control-static"><%= team.user.email %></p>
   </div>
 
-  <div class="form-group">
+  <div class="form-group hub-cell">
     <label class="sr-only">Name</label>
     <p class="form-control-static"><%= team.name %></p>
   </div>
 
-  <div class="form-group">
+  <div class="form-group hub-cell">
     <% @selected_team_role = role %>
-    <%= select(:selected_team_role, :role, [["Reader", "reader"], ["Writer", "writer"], ["Owner", "owner"]], {}, { :class => "form-control" }) %>
+    <%= select(:selected_team_role, :role, [["Reader", "reader"], ["Writer", "writer"], ["Owner", "owner"]], {}, { :class => "form-control", disabled: !@update_enabled }) %>
   </div>
 
-  <%= submit_tag("Update", class: "btn btn-default") %>
+  <div class="form-group hub-cell">
+    <% if @update_enabled %>
+      <%= submit_tag("Update", class: "btn btn-inline btn-success") %>
+    <% end %>
+  </div>
 
-  <div class="form-group">
-    <%= link_to "Destroy", project_team_path(project_id, role.id), method: :delete, data: { confirm: "Are you sure?" } %>
+  <div class="form-group hub-cell">
+    <% if ::Projects::Teams::Policy.allowed_actions(current_user.id, project_id, role.id).include?(:destroy) %>
+      <%= link_to project_team_path(project_id, role.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+        <button type="button" class="btn btn-inline btn-danger">Destroy</button>
+      <% end %>
+    <% end %>
   </div>
 <% end %>
-
-
-
-

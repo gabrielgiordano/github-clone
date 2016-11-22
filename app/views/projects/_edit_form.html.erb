@@ -13,7 +13,7 @@
   <fieldset>
     <div class="form-group">
       <%= f.label :name %>
-      <%= f.text_field :name, autofocus: true, placeholder: "Awesome Name", class: "form-control" %>
+      <%= f.text_field :name, autofocus: true, placeholder: "Awesome Name", class: "form-control", disabled: true %>
     </div>
 
     <div class="form-group">
@@ -26,6 +26,6 @@
       <%= f.check_box :private %>
     </div>
 
-    <%= f.submit "Create Project", class: "btn btn-success" %>
+    <%= f.submit "Update Project", class: "btn btn-success" %>
   </fieldset>
 <% end %>

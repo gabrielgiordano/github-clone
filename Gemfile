@@ -33,7 +33,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'devise-i18n'
 
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap_sb_admin_base_v2'
+
+#gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'rugged'
 

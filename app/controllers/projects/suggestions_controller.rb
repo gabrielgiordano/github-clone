@@ -76,6 +76,7 @@ module Projects
 
       def set_project_id
         @project_id = project_id
+        @project = Project.find(project_id)
       end
 
       def suggestion_params

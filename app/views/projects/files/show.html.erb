@@ -1,7 +1,14 @@
-<p id="notice"><%= notice %></p>
+<%= render '/projects/project_header' %>
 
-<h1><%= @file[:name] %></h1>
+<%= render :layout => '/projects/project_panel', :locals => {:menu => { files: true } } do %>
 
-<pre><%= @file[:content] %></pre>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <%= @file[:name] %>
+    </div>
+    <div class="panel-body">
+      <pre><%= @file[:content] %></pre>
+    </div>
+  </div>
 
-<%= link_to 'Back', project_path(@project_id) %>
+<% end %>

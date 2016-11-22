@@ -1,25 +1,26 @@
-<%= form_tag(project_suggestion_path(project_id, suggestion), method: "put") do %>
-  <% if suggestion.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(suggestion.errors.count, "error") %> prohibited this suggestion from being updated:</h2>
-
-      <ul>
+<% if suggestion.errors.any? %>
+  <div class="alert alert-warning alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <ul>
       <% suggestion.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
-      </ul>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_tag(project_suggestion_path(project_id, suggestion), method: "put") do %>
+  <fieldset>
+    <div class="form-group">
+      <%= label_tag :title %>
+      <%= text_field_tag :title, suggestion.title, autofocus: true, placeholder: "Suggestion title", class: "form-control" %>
     </div>
-  <% end %>
 
-  <div class="form-group">
-    <%= label_tag :title %>
-    <%= text_field_tag(:title, suggestion.title, class: "form-control") %>
-  </div>
+    <div class="form-group">
+      <%= label_tag :description %>
+      <%= text_area_tag :description, suggestion.description, placeholder: "Nice Description", class: "form-control" %>
+    </div>
 
-  <div class="form-group">
-    <%= label_tag :description %>
-    <%= text_field_tag(:description, suggestion.description, class: "form-control") %>
-  </div>
-
-  <%= submit_tag("Edit Suggestion", class: "btn btn-default") %>
+    <%= submit_tag "Update Suggestion", class: "btn btn-success" %>
+  </fieldset>
 <% end %>

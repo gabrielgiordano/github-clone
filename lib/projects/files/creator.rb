@@ -12,8 +12,12 @@ module Projects
       end
 
       def execute
-        ::Projects::Git::Files::Creator.execute(file, repository, "master", author_email, commit_message)
-        rebase_or_destroy_remaining_suggestions
+        if file.present?
+          ::Projects::Git::Files::Creator.execute(file, repository, "master", author_email, commit_message)
+          rebase_or_destroy_remaining_suggestions
+        else
+          return false
+        end
       end
 
       private

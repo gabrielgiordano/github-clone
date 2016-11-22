@@ -1,35 +1,56 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @team.name %>
-</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Members</th>
-      <th colspan="1"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @team.members.each do |member| %>
-      <tr>
-        <td><%= member.email %></td>
-        <td><%= link_to 'Destroy', team_member_path(@team, member), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= form_tag(team_members_path(@team), method: "post", class: "form-inline") do  %>
-  <div class="form-group">
-    <%= label_tag(:email, "Email") %>
-    <%= text_field_tag(:email, "", class: "form-control") %>
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header"><%= @team.name %></h1>
   </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
 
-  <%= submit_tag("Add member", class: "btn btn-default") %>
-<% end %>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
 
-<%= link_to 'Edit', edit_team_path(@team) %> |
-<%= link_to 'Back', teams_path %>
+        <p id="notice"><%= notice %></p>
+
+        <% if @team.members.size > 0 %>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th colspan="1"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @team.members.each do |member| %>
+                <tr>
+                  <td><%= member.email %></td>
+                  <td><%= link_to 'Destroy', team_member_path(@team, member), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <p>There are 0 collaborators in this team. Add a new one!</p>
+        <% end %>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Add a new member
+          </div>
+          <div class="panel-body">
+            <%= form_tag(team_members_path(@team), method: "post", class: "form-inline") do  %>
+              <div class="form-group">
+                <%= label_tag(:email, "Email") %>
+                <%= text_field_tag(:email, "", class: "form-control") %>
+              </div>
+
+              <%= submit_tag("Add member", class: "btn btn-inline btn-success") %>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

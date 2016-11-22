@@ -2,7 +2,7 @@ FILE_NAME_CONSTRAINT = { :file_name => /[\-\_\w\.]+/ }
 
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: 'home#index'
+  root to: 'projects#index'
 
   devise_for :users
 
@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       delete "members/:user_id", to: "members#destroy", as: :member
     end
   end
+
 
   resources :projects do
     scope module: :projects do
@@ -26,4 +27,5 @@ Rails.application.routes.draw do
       end
     end
   end
+  get "my_projects", to: "projects#my_projects"
 end

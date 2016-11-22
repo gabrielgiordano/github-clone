@@ -24,7 +24,7 @@ module Projects
       end
 
       def allowed_actions
-        action = []
+        actions = []
         actions += [:show] if public_project? || role.reader?
         actions += [:new, :create, :destroy] if role.owner?
         actions

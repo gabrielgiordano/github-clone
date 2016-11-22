@@ -1,0 +1,28 @@
+<div class="navbar-default sidebar" role="navigation">
+  <div class="sidebar-nav navbar-collapse">
+    <ul class="nav" id="side-menu">
+      <li class="sidebar-search">
+        <div class="input-group custom-search-form">
+          <input type="text" class="form-control" placeholder="Search..." disabled>
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" disabled>
+              <i class="fa fa-search"></i>
+            </button>
+          </span>
+        </div>
+        <!-- /input-group -->
+      </li>
+
+      <li>
+        <%= link_to projects_path do %><i class="fa fa-dashboard fa-fw"></i> All Projects<% end %>
+        <% if current_user %>
+          <%= link_to my_projects_path do %><i class="fa fa-th-list fa-fw"></i> My Projects<% end %>
+          <%= link_to teams_path do %><i class="fa fa-group fa-fw"></i> My Teams<% end %>
+        <% end %>
+      </li>
+
+    </ul>
+  </div>
+  <!-- /.sidebar-collapse -->
+</div>
+<!-- /.navbar-static-side -->

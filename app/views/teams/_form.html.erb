@@ -1,22 +1,22 @@
-<%= form_for(team) do |f| %>
-  <% if team.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(team.errors.count, "error") %> prohibited this team from being saved:</h2>
-
-      <ul>
+<% if team.errors.any? %>
+  <div class="alert alert-warning alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <ul>
       <% team.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
+    </ul>
   </div>
 <% end %>
+
+<%= form_for(team) do |f| %>
+  <fieldset>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, autofocus: true, placeholder: "Awesome Team Name", class: "form-control" %>
+    </div>
+
+    <%= f.submit "Save Team", class: "btn btn-success" %>
+  </fieldset>
+<% end %>
+

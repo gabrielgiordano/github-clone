@@ -1,0 +1,38 @@
+html, body, .full-height {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-inline > * {
+  margin: 5px 3px;
+}
+
+.form-inline > .form-group > label {
+  margin-right: 5px;
+}
+
+.btn-inline {
+  margin-bottom: 0px;
+}
+
+div.hub-table {
+  display: table;
+  border-spacing: 15px;
+}
+
+form.hub-row, div.hub-row {
+  display: table-row;
+}
+
+span.hub-cell, div.hub-cell {
+  display: table-cell;
+  text-align: center;
+}
+
+span.hub-header {
+  te
+}

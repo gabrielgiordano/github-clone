@@ -16,7 +16,7 @@ module Projects
 
     def allowed?
       case
-      when [:index, :new, :create].include?(action) then true
+      when [:index, :new, :create, :my_projects].include?(action) then true
       when [:destroy].include?(action) then role.owner?
       when [:edit, :update].include?(action) then role.writer?
       when [:show].include?(action) then public_project? || role.reader?

@@ -1,31 +1,44 @@
-<p id="notice"><%= notice %></p>
+<%= render '/projects/project_header' %>
 
-<h1>Suggestions</h1>
+<%= render :layout => '/projects/project_panel', :locals => {:menu => { suggestions: true } } do %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <% if @suggestions.size > 0 %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @suggestions.each do |suggestion| %>
+          <tr>
+            <td><%= link_to suggestion.title, project_suggestion_path(@project_id, suggestion) %></td>
+            <td>
+              <% if ::Projects::Suggestions::Policy.allowed_actions(current_user.id, @project_id, suggestion.id).include?(:edit) %>
+                <%= link_to "Edit", edit_project_suggestion_path(@project_id, suggestion) %> |
+              <% end %>
 
-  <tbody>
-    <% @suggestions.each do |suggestion| %>
-      <tr>
-        <td><%= suggestion.title %></td>
-        <td><%= suggestion.description %></td>
-        <td><%= link_to "Show", project_suggestion_path(@project_id, suggestion) %></td>
-        <td><%= link_to "Edit", edit_project_suggestion_path(@project_id, suggestion) %></td>
-        <td><%= link_to "Destroy", project_suggestion_path(@project_id, suggestion), method: :delete, data: { confirm: "Are you sure?" } %></td>
-        <td><%= link_to "Accept", project_suggestion_accept_path(@project_id, suggestion), :method=> :post %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+              <% if ::Projects::Suggestions::Policy.allowed_actions(current_user.id, @project_id, suggestion.id).include?(:destroy) %>
+                <%= link_to "Destroy", project_suggestion_path(@project_id, suggestion), method: :delete, data: { confirm: "Are you sure?" } %>
+              <% end %>
 
-<br>
+              <% if ::Projects::Suggestions::Policy.allowed_actions(current_user.id, @project_id, suggestion.id).include?(:accept) %>
+                | <%= link_to "Accept", project_suggestion_accept_path(@project_id, suggestion), :method=> :post %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No one made a suggestion. Go ahead and make a new one!</p>
+  <% end %>
 
-<%= link_to "New Suggestion", new_project_suggestion_path(@project_id) %> |
-<%= link_to "Back", project_path(@project_id) %>
+  <br>
+
+  <%= link_to new_project_suggestion_path(@project_id) do %>
+    <button type="button" class="btn btn-success">New Suggestion</button>
+  <% end %>
+
+<% end %>

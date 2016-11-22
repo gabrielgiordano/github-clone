@@ -1,18 +1,32 @@
-<%= form_tag(project_collaborator_path(project_id, user_role.id), method: "put", class: "form-inline") do  %>
-  <div class="form-group">
+<%= form_tag(project_collaborator_path(project_id, user_role.id), method: "put", class: "hub-row") do  %>
+  <% if ::Projects::Collaborators::Policy.allowed_actions(current_user.id, project_id, user_role.id).include?(:update) %>
+    <% @update_enabled = true %>
+  <% else %>
+    <% @update_enabled = false %>
+  <% end %>
+
+  <div class="form-group hub-cell">
     <label class="sr-only">Email</label>
     <p class="form-control-static"><%= user.email %></p>
   </div>
 
-  <div class="form-group">
+  <div class="form-group hub-cell">
     <% @selected_user_role = user_role %>
-    <%= select(:selected_user_role, :role, [["Reader", "reader"], ["Writer", "writer"], ["Owner", "owner"]], {}, { :class => "form-control" }) %>
+    <%= select(:selected_user_role, :role, [["Reader", "reader"], ["Writer", "writer"], ["Owner", "owner"]], {}, { :class => "form-control", disabled: !@update_enabled }) %>
   </div>
 
-  <%= submit_tag("Update", class: "btn btn-default") %>
+  <div class="form-group hub-cell">
+    <% if @update_enabled %>
+      <%= submit_tag("Update", class: "btn btn-inline btn-success") %>
+    <% end %>
+  </div>
 
-  <div class="form-group">
-    <%= link_to "Destroy", project_collaborator_path(project_id, user_role.id), method: :delete, data: { confirm: "Are you sure?" } %>
+  <div class="form-group hub-cell">
+    <% if ::Projects::Collaborators::Policy.allowed_actions(current_user.id, project_id, user_role.id).include?(:destroy) %>
+      <%= link_to project_collaborator_path(project_id, user_role.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+        <button type="button" class="btn btn-inline btn-danger">Destroy</button>
+      <% end %>
+    <% end %>
   </div>
 <% end %>
 

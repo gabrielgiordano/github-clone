@@ -12,8 +12,14 @@ module Projects
     end
 
     def create
-      Files::Creator.execute(current_user.id, project_id, files_params[:file])
-      flash[:notice] = "File uploaded"
+      creation = Files::Creator.execute(current_user.id, project_id, files_params[:file])
+
+      if creation
+        flash[:notice] = "File uploaded"
+      else
+        flash[:notice] = "File missing"
+      end
+
       redirect_to project_url(project_id)
     end
 
@@ -27,6 +33,7 @@ module Projects
 
     def set_project_id
       @project_id = project_id
+      @project = Project.find(project_id)
     end
 
     def files_params

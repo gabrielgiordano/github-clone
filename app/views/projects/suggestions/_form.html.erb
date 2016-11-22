@@ -1,35 +1,50 @@
-<%= form_tag(project_suggestions_path, method: "post", multipart: true) do %>
-  <% if suggestion.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(suggestion.errors.count, "error") %> prohibited this suggestion from being saved:</h2>
-
-      <ul>
+<% if suggestion.errors.any? %>
+  <div class="alert alert-warning alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <ul>
       <% suggestion.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="form-group">
-    <%= label_tag :title %>
-    <%= text_field_tag(:title, "", class: "form-control") %>
+    </ul>
   </div>
-
-  <div class="form-group">
-    <%= label_tag :description %>
-    <%= text_field_tag(:description, "", class: "form-control") %>
-  </div>
-
-  <div class="form-group">
-    <%= label_tag(:file, "Upload File:") %>
-    <%= file_field_tag :file %>
-  </div>
-
-  <div class="form-group">
-    <%= label_tag(:file_name, "Delete File:") %>
-    <%= text_field_tag(:file_name, "", class: "form-control") %>
-  </div>
-
-  <%= submit_tag("Send Suggestion", class: "btn btn-default") %>
 <% end %>
+
+<%= form_tag(project_suggestions_path, method: "post", multipart: true) do %>
+  <fieldset>
+    <div class="form-group">
+      <%= label_tag :title %>
+      <%= text_field_tag :title, "", autofocus: true, placeholder: "New suggestion title", class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag :description %>
+      <%= text_area_tag :description, "", placeholder: "Nice Description", class: "form-control" %>
+    </div>
+
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#upload-tabs" data-toggle="tab">Upload File</a></li>
+      <li><a href="#delete-tabs" data-toggle="tab">Delete File</a></li>
+    </ul>
+
+    <br>
+
+    <div class="tab-content">
+      <div class="tab-pane fade in active" id="upload-tabs">
+        <div class="form-group">
+          <%= label_tag(:file, "File to be uploaded:") %>
+          <%= file_field_tag :file %>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="delete-tabs">
+        <div class="form-group">
+          <%= label_tag(:file_name, "Name of file to be deleted:") %>
+          <%= text_field_tag(:file_name, "", placeholder: "Filename", class: "form-control") %>
+        </div>
+      </div>
+    </div>
+
+    <%= submit_tag "Send Suggestion", class: "btn btn-success" %>
+  </fieldset>
+<% end %>
+
+

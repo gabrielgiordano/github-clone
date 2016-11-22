@@ -1,0 +1,17 @@
+<li class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+  </a>
+  <ul class="dropdown-menu dropdown-user">
+    <% if user_signed_in? %>
+      <li><%= link_to edit_user_registration_path do %><i class="fa fa-user fa-fw"></i> Editar Conta<% end %></li>
+      <li class="divider"></li>
+      <li><%= link_to destroy_user_session_path, :method=>"delete" do %><i class="fa fa-sign-out fa-fw"></i> Sair<% end %></li>
+    <% else %>
+      <li><%= link_to new_user_session_path do %><i class="fa fa-sign-in fa-fw"></i> Logar<% end %></li>
+      <li><%= link_to new_user_registration_path do %><i class="fa fa-user fa-fw"></i> Registrar<% end %></li>
+    <% end %>
+  </ul>
+  <!-- /.dropdown-user -->
+</li>
+<!-- /.dropdown -->

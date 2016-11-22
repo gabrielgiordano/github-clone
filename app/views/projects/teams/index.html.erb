@@ -1,22 +1,51 @@
-<p id="notice"><%= notice %></p>
+<%= render '/projects/project_header' %>
 
-<h1>Project Teams</h1>
+<%= render :layout => '/projects/project_panel', :locals => {:menu => { teams: true } } do %>
 
-<% if @team_role&.errors&.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@team_role.errors.count, "error") %> prohibited this operation from being concluded:</h2>
-    <ul>
-    <% @team_role.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+  <% if @team_role&.errors&.any? %>
+    <div class="alert alert-warning alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      <ul>
+        <% @team_role.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Project Teams
+    </div>
+    <div class="panel-body">
+    <% if @team_roles.size > 0 %>
+      <div class="hub-table">
+        <div class="hub-row">
+          <span class="hub-cell"><strong>Team Owner</strong></span>
+          <span class="hub-cell"><strong>Team Name</strong></span>
+          <span class="hub-cell"><strong>Role</strong></span>
+          <span class="hub-cell"></span>
+          <span class="hub-cell"></span>
+        </div>
+        <% @team_roles.each do |team_role| %>
+          <%= render "update_form", project_id: @project_id, team: team_role[:team], role: team_role[:role] %>
+        <% end %>
+      </div>
+    <% else %>
+      <p>No teams in this project. Add one!</p>
     <% end %>
-    </ul>
+
+    </div>
   </div>
+
+  <% if ::Projects::Teams::Policy.allowed_actions(current_user.id, @project_id, nil).include?(:create) %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Add new one
+      </div>
+      <div class="panel-body">
+        <%= render "form", team_role: @team_role %>
+      </div>
+    </div>
+  <% end %>
 <% end %>
-
-<% @team_roles.each do |team_role| %>
-  <%= render "update_form", project_id: @project_id, team: team_role[:team], role: team_role[:role] %>
-<% end %>
-
-<%= render "form", team_role: @team_role %>
-
-<%= link_to 'Back', project_path(@project_id) %>

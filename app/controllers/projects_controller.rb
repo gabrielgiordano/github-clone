@@ -6,6 +6,11 @@ class ProjectsController < ApplicationController
     @projects = Projects::List.execute(current_user&.id)
   end
 
+  def my_projects
+    @projects = Projects::MyProjects.execute(current_user&.id)
+    render :index
+  end
+
   def new
     @project = Project.new
   end
@@ -28,7 +33,9 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    update = Projects::Updater.execute(project_id, project_params)
+    update_params = project_params
+    update_params.delete(:name)
+    update = Projects::Updater.execute(project_id, update_params)
 
     respond_to do |format|
       if update.successful?

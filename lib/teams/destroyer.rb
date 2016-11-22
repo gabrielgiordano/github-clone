@@ -10,6 +10,7 @@ module Teams
 
     def execute
       ActiveRecord::Base.transaction do
+        delete_associations_with_projects
         team.destroy
       end
     end
@@ -17,6 +18,10 @@ module Teams
     private
 
     attr_reader :team_id
+
+    def delete_associations_with_projects
+      TeamRole.where(team_id: team.id).destroy_all
+    end
 
     def team
       @team ||= Team.find(team_id)

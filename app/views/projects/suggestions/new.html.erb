@@ -1,5 +1,7 @@
-<h1>New Suggestion</h1>
+<%= render '/projects/project_header' %>
 
-<%= render 'form', suggestion: @suggestion %>
+<%= render :layout => '/projects/project_panel', :locals => {:menu => { suggestions: true } } do %>
 
-<%= link_to 'Back', project_suggestions_path(@project_id) %>
+  <%= render 'form', suggestion: @suggestion %>
+
+<% end %>

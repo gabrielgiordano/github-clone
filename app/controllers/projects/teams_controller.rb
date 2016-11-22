@@ -1,7 +1,7 @@
 module Projects
   class TeamsController < ApplicationController
     before_action :authenticate_user!
-    before_action -> { authorize_user_with(Teams::Policy, current_user.id, project_id, team_role_id, action_name) }
+    before_action -> { authorize_user_with(::Projects::Teams::Policy, current_user.id, project_id, team_role_id, action_name) }
     before_action :set_project_id
 
     def index
@@ -75,6 +75,7 @@ module Projects
 
     def set_project_id
       @project_id = project_id
+      @project = Project.find project_id
     end
   end
 end

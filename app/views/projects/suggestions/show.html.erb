@@ -1,16 +1,23 @@
-<p id="notice"><%= notice %></p>
+<%= render '/projects/project_header' %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @suggestion.title %>
-</p>
+<%= render :layout => '/projects/project_panel', :locals => {:menu => { suggestions: true } } do %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @suggestion.description %>
-</p>
 
-<pre><%= @diff.force_encoding("UTF-8") %></pre>
-
-<%= link_to 'Edit', edit_project_suggestion_path(@project_id, @suggestion) %> |
-<%= link_to 'Back', project_suggestions_path(@project_id) %>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel">
+      <div class="panel-body">
+        <h3><%= @suggestion.title %></h3>
+        <p><%= @suggestion.description %></p>
+        <% if ::Projects::Suggestions::Policy.allowed_actions(current_user.id, @project_id, @suggestion.id).include?(:edit) %>
+          <%= link_to 'Edit Suggestion', edit_project_suggestion_path(@project_id, @suggestion) %>
+        <% end %>
+      </div>
+      <div class="panel-body">
+        <h3>Modifications</h3>
+        <pre><%= @diff.force_encoding("UTF-8") %></pre>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
