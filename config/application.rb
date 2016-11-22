@@ -13,5 +13,7 @@ module JustDoIt
     # -- all .rb files in that directory are automatically loaded.
 
     config.autoload_paths << "#{Rails.root}/lib"
+
+    config.assets.paths << Rails.root.join("vendor", "assets", "bower")
   end
 end

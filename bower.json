@@ -1,0 +1,21 @@
+{
+  "name": "just-do-it",
+  "authors": [
+    "Gabriel Giordano <gabriel.giordano@estudar.org.br>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/assets/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "diff2html": "^2.0.10"
+  }
+}
