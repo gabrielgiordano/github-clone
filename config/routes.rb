@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     scope module: :projects do
       resources :files, only: [:new, :create]
       get "files/:file_name", to: "files#show", constraints: FILE_NAME_CONSTRAINT, as: :file
+      get "files/download/:file_name", to: "files#download", constraints: FILE_NAME_CONSTRAINT, as: :file_download
       delete "files/:file_name", to: "files#destroy", constraints: FILE_NAME_CONSTRAINT
       resources :teams, only: [:index, :create, :update, :destroy]
       resources :collaborators, only: [:index, :create, :update, :destroy]

@@ -17,7 +17,7 @@ module Projects
 
       def allowed?
         case
-        when [:show].include?(action) then public_project? || role.reader?
+        when [:show, :download].include?(action) then public_project? || role.reader?
         when [:new, :create, :destroy].include?(action) then role.owner?
         else false
         end
@@ -25,7 +25,7 @@ module Projects
 
       def allowed_actions
         actions = []
-        actions += [:show] if public_project? || role.reader?
+        actions += [:show, :download] if public_project? || role.reader?
         actions += [:new, :create, :destroy] if role.owner?
         actions
       end

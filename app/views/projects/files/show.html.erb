@@ -5,6 +5,9 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <%= @file[:name] %>
+      <% if ::Projects::Files::Policy.allowed_actions(current_user&.id, @project_id).include?(:download) %>
+          <%= link_to "Download", project_file_download_path(@project_id, @file[:name]), class: "download-file" %>
+      <% end %>
     </div>
     <div class="panel-body">
       <pre class="prettyprint"><%= @file[:content] %></pre>

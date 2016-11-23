@@ -11,6 +11,13 @@ module Projects
       @file = Files::Show.execute(project_id, "master", file_name)
     end
 
+    def download
+      file = Files::Show.execute(project_id, "master", file_name)
+      file_extension = File.extname(file[:name])[1..-1]
+
+      send_data file[:content], filename: file[:name], type: "application/#{file_extension}"
+    end
+
     def create
       creation = Files::Creator.execute(current_user.id, project_id, files_params[:file])
 

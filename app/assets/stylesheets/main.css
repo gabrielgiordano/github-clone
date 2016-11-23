@@ -40,3 +40,7 @@ span.hub-cell, div.hub-cell {
 span.hub-header {
   te
 }
+
+.download-file {
+  float: right;
+}

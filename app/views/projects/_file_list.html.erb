@@ -10,10 +10,15 @@
       <% files.each do |file| %>
         <tr>
           <td><%= link_to file[:name], project_file_path(project_id, file[:name]) %></td>
-          <% if ::Projects::Files::Policy.allowed_actions(current_user&.id, project_id).include?(:destroy) %>
-            <td><%= link_to 'Destroy', project_file_path(project_id, file[:name]), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <% else %>
-            <td></td>
+          <td>
+            <% if ::Projects::Files::Policy.allowed_actions(current_user&.id, project_id).include?(:download) %>
+              <%= link_to "Download", project_file_download_path(project_id, file[:name]) %>
+            <% end %>
+
+            <% if ::Projects::Files::Policy.allowed_actions(current_user&.id, project_id).include?(:destroy) %>
+              | <%= link_to 'Destroy', project_file_path(project_id, file[:name]), method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% else %>
+          </td>
           <% end %>
         </tr>
       <% end %>
