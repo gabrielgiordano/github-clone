@@ -9,7 +9,7 @@ module Projects
     end
 
     def execute
-      user_projects
+      user_projects.order('updated_at DESC')
     end
 
     private

@@ -6,7 +6,7 @@ module Projects
     before_action :set_project_id
 
     def index
-      @suggestions = Suggestion.all
+      @suggestions = Suggestion.where(project_id: project_id).order('updated_at DESC').all
     end
 
     def show

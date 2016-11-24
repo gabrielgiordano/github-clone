@@ -23,7 +23,7 @@ module Projects
       attr_reader :project_id
 
       def collaborators_roles
-        UserRole.includes(:user).where(project_id: project_id)
+        UserRole.includes(:user).where(project_id: project_id).order('updated_at DESC')
       end
     end
   end

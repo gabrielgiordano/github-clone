@@ -23,7 +23,7 @@ module Projects
       attr_reader :project_id
 
       def team_roles
-        TeamRole.includes(:team).where(project_id: project_id)
+        TeamRole.includes(:team).where(project_id: project_id).order('updated_at DESC')
       end
     end
   end
