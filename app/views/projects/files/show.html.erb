@@ -10,7 +10,11 @@
       <% end %>
     </div>
     <div class="panel-body">
-      <pre class="prettyprint"><%= @file[:content] %></pre>
+      <% if @file[:binary] %>
+        <p>Sorry, I can't render a binary file. But you can also download this file.</p>
+      <% else %>
+        <pre class="prettyprint"><%= @file[:content] %></pre>
+      <% end %>
     </div>
   </div>
 

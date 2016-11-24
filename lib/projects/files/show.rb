@@ -13,8 +13,9 @@ module Projects
 
       def execute
         {
-          name: git_file[:file][:name],
-          content: git_file[:blob].content
+          name: git_file_name,
+          content: git_file_content,
+          binary: binary?
         }
       end
 
@@ -22,12 +23,27 @@ module Projects
 
       attr_reader :project_id, :branch, :file_name
 
+      def git_file_name
+        git_file[:file][:name]
+      end
+
+      def git_file_content
+        git_file[:blob].content
+      end
+
       def git_file
-        ::Projects::Git::Files::Retriever.execute(repository, branch, file_name)
+        @git_file ||= ::Projects::Git::Files::Retriever.execute(repository, branch, file_name)
       end
 
       def repository
         @repository ||= ::Projects::Repository.for(project_id)
+      end
+
+      def binary?
+        file = Tempfile.new(git_file_name)
+        File.open(file.path, "wb") { |f| f.write git_file_content }
+        fm = FileMagic.new(FileMagic::MAGIC_MIME)
+        fm.file(file.path) =~ /^text\// ? false : true
       end
     end
   end

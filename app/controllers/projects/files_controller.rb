@@ -9,6 +9,10 @@ module Projects
 
     def show
       @file = Files::Show.execute(project_id, "master", file_name)
+
+      respond_to do |format|
+        format.html { render :show }
+      end
     end
 
     def download

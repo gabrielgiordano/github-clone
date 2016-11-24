@@ -39,6 +39,7 @@ gem 'bootstrap_sb_admin_base_v2'
 
 gem 'rugged'
 gem 'gravtastic'
+gem 'ruby-filemagic'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
