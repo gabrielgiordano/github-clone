@@ -38,6 +38,7 @@ gem 'bootstrap_sb_admin_base_v2'
 #gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'rugged'
+gem 'gravtastic'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

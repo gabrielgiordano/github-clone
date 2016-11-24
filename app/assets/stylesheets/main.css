@@ -44,3 +44,14 @@ span.hub-header {
 .download-file {
   float: right;
 }
+
+.user-avatar-container {
+  text-align: center;
+}
+
+.user-avatar {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+}

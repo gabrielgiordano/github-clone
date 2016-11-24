@@ -13,6 +13,19 @@
         <!-- /input-group -->
       </li>
 
+      <% if current_user %>
+        <li class="sidebar-search">
+          <div class="user-avatar-container">
+            <p>You are signed in as</p>
+            <div class="user-avatar">
+              <%= image_tag current_user.gravatar_url, class: "img-circle" %>
+            </div>
+            <strong><p><%= current_user.email %></p></strong>
+          </div>
+          <!-- /input-group -->
+        </li>
+      <% end %>
+
       <li>
         <%= link_to projects_path do %><i class="fa fa-dashboard fa-fw"></i> All Projects<% end %>
         <% if current_user %>
