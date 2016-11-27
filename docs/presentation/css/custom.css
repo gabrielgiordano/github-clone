@@ -1,0 +1,16 @@
+.flowtime .ft-page {
+	overflow: hidden;
+}
+
+.flowtime h1, .flowtime p {
+  color: white;
+  font-family: Arial;
+}
+
+html {
+  background-color: rgb(16, 16, 16);
+}
+
+.ft-page {
+  background-color: black;
+}
