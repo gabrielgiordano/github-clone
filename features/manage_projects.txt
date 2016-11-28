@@ -1,0 +1,70 @@
+Caso de Uso 1: Gerenciar Projetos
+  Contexto de uso:
+    Este caso de uso descreve as operações básicas que podem ser feitas para criar, editar, visualizar e deletar um projeto no sistema.
+  Escopo de Design: Heart - White box
+  Nível de abstração: Objetivo de Usuário
+  Atores:
+    Usuário (Ator primário)
+    Heart (System Under Design)
+  Stakeholders e interesses:
+    Gabriel - Nenhum dado inválido deve ser inserido no sistema
+    Usuário - Gerenciar projetos
+  Garantias Mínimas: Não explodir nada na cara do usuário
+  Garantias de Sucesso: Usuário realizou a ação desejada e as mudanças foram persistidas no sistema
+
+  Precondições:
+    Usuário possui uma conta e está logado no sistema
+  Trigger:
+    Usuário seleciona operação explicitamente através da interface
+
+  Cenários:
+    Criar projeto:
+      1. Usuário envia ao sistema
+        - Nome do projeto
+        - Descrição inicial do projeto
+      2. Sistema valida e salva os dados
+      3. Sistema retorna mensagem de sucesso e mostra o projeto criado
+
+      2a. Erros de validação ou persistência:
+        2a1. Sistema retorna mensagem contendo a razão do erro
+
+    Editar projeto:
+      1. Usuário envia ao sistema
+        - Identificação do projeto a ser editado
+        - Dados a serem alterados no projeto
+      2. Sistema valida e salva os dados
+      3. Sistema retorna mensagem de sucesso e mostra o projeto editado
+
+      1a. Projeto inexistente:
+        1a1. Sistema retorna mensagem dizendo que projeto não existe
+      1b. Projeto sem permissão de edição:
+        1b1. Sistema retorna mensagem dizendo que projeto não existe
+        1b2. Sistema loga o evento
+      2a. Erros de validação ou persistência:
+        2a1. Sistema retorna mensagem contendo a razão do erro
+
+    Visualizar projeto:
+      1. Usuário envia ao sistema identificação do projeto
+      2. Sistema retorna dados do projeto
+
+      1a. Projeto inexistente:
+        1a1. Sistema retorna mensagem dizendo que projeto não existe
+      1b. Projeto sem permissão de visualização:
+        1b1. Sistema retorna mensagem dizendo que projeto não existe
+        1b2. Sistema loga o evento
+
+    Deletar projeto:
+      1. Usuário envia identicação do projeto
+      2. Sistema pede confirmação do nome do projeto
+      3. Usuário confirma nome do projeto
+      4. Sistema deleta o projeto e retorna mensagem de sucesso
+
+      1a. Projeto inexistente:
+        1a1. Sistema retorna mensagem dizendo que projeto não existe
+      1b. Projeto sem permissão de deleção:
+        1b1. Sistema retorna mensagem dizendo que projeto não existe
+        1b2. Sistema loga o evento
+      3a. Confirmação errada:
+        3a1. Sistema aborta caso de uso
+      4a. Erro com sistema de persistencia:
+        4a1. Retorna mensagem contendo razão do erro
