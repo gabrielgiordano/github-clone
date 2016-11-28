@@ -44,7 +44,7 @@ Dado(/^um projeto público chamado "([^"]*)" com os seguintes arquivos$/) do |pr
   files.hashes.each { |file| upload_temporary_file(@current_page, file) }
 end
 
-Quando(/^"([^"]*)" criar uma sugestões com os seguintes dados$/) do |email, suggestions|
+Quando(/^"([^"]*)" criar? uma sugestões com os seguintes dados$/) do |email, suggestions|
   suggestions.hashes.each { |suggestion| create_suggestion(suggestion, @project_id) }
 end
 
@@ -63,7 +63,7 @@ Quando(/^a sugestão chamada "([^"]*)" for aceita$/) do |suggestion_name|
 end
 
 
-Então(/^o projeto "([^"]*)" deve conter os seguintes arquivos$/) do |project_name, files_table|
+Então(/^o projeto deve conter os seguintes arquivos$/) do |files_table|
   files = files_table.hashes
 
   files.each do |file|

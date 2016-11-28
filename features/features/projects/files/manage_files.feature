@@ -25,7 +25,7 @@ Funcionalidade: Gerenciamento de arquivos de um projeto de um usuário
     E ele possui um projeto chamado "Projeto_1" com os arquivos
       | "Arquivo_1" |
       | "Arquivo_2" |
-    Quando ele deletar um arquivo "Arquivo_1"
+    Quando ele adicionar o arquivo
       | nome_do_arquivo     | "Arquivo_3"                          |
       | conteudo_do_arquivo | "Conteúdo de exemplo para Arquivo_3" |
     Então ele deve ver uma listagem de arquivos contendo

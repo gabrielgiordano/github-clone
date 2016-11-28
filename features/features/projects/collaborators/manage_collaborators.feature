@@ -2,7 +2,7 @@
 
 Funcionalidade: Gerenciamento de colaboradores de um projeto
 
-  Cenário: Usuário adicionar colaborador em projeto
+  Cenário: Usuário adiciona colaborador em projeto
     Dado um usuário "usuario1@example.com" logado no sistema
     E ele possui um projeto privado chamado "Projeto_1" com os seguintes colaboradores
       | email                | permissao |

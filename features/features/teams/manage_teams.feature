@@ -6,8 +6,8 @@ Funcionalidade: Gerenciamento de times de um usuário
     Dado um usuário "usuario@example.com" logado no sistema com os seguintes times
       | Time 1 |
       | Time 2 |
-    Quando Ele visualizar todos os times
-    E a listagem deve conter os times
+    Quando ele visualizar todos os times
+    Então a listagem deve conter os times
       | Time 1 |
       | Time 2 |
 

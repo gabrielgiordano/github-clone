@@ -35,10 +35,10 @@ Funcionalidade: Gerenciamento de sugestões para um projeto
     E um projeto público chamado "Projeto_1" com os seguintes arquivos
       | nome    | conteudo |
       | Arquivo | Conteúdo |
-    E "usuario@example.com" criar uma sugestões com os seguintes dados
+    E "usuario@example.com" cria uma sugestões com os seguintes dados
       | nome     | descricao | arquivo | conteudo         |
       | Sugestão | Descrição | Arquivo | Conteúdo Editado |
     Quando a sugestão chamada "Sugestão" for aceita
-    Então o projeto "Projeto_1" deve conter os seguintes arquivos
+    Então o projeto deve conter os seguintes arquivos
       | nome    | conteudo         |
       | Arquivo | Conteúdo Editado |

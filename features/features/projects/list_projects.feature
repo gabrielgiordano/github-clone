@@ -4,8 +4,8 @@ Funcionalidade: Exibir projetos de um usuário
   Descreve as regras básicas de visualização de projetos dentro do sistema
   Basicamente, um usuário não pode ver os projetos privados de outros usuários
 
-  Cenário: Usuários pode visualizar projetos públicos
-    Dado os usuários
+  Cenário: Usuário pode visualizar projetos públicos
+    Dado o usuário
       | usuario@example.com |
     E os projetos públicos
       | Projeto_1 |
@@ -15,7 +15,7 @@ Funcionalidade: Exibir projetos de um usuário
       | Projeto_1 |
       | Projeto_2 |
 
-  Cenário: Usuários pode visualizar seus projetos privados
+  Cenário: Usuários podem visualizar seus projetos privados
     Dado os usuários
       | usuario1@example.com |
       | usuario2@example.com |
@@ -28,7 +28,7 @@ Funcionalidade: Exibir projetos de um usuário
       | Projeto_1 |
       | Projeto_2 |
 
-  Cenário: Usuários não pode visualizar projetos privados de outros usuários
+  Cenário: Usuários não podem visualizar projetos privados de outros usuários
     Dado os usuários
       | usuario1@example.com |
       | usuario2@example.com |

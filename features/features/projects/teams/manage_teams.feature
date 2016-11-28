@@ -2,7 +2,7 @@
 
 Funcionalidade: Gerenciamento de times em um projeto
 
-  Cenário: Usuário adicionar time em projeto
+  Cenário: Usuário adiciona time em projeto
     Dado um usuário "usuario1@example.com" logado no sistema
     E ele possui um time chamado "Time_1" com os seguintes membros
       | email                |
